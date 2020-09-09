@@ -3,5 +3,5 @@ describe('Landing page', () => {
         cy.visit('/');
 
         cy.get('[data-cy=application-wrapper]').should('be.visible');
-    })
-})
+    });
+});
