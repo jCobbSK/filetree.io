@@ -1,4 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Jakub tries to infiltrate Smarkup
+
+> "I'm a programmer. I like programming. And the best way I've found to have a positive impact on code is to write it." -- Uncle Bob
+
+## Tech used
+
+* [Create React App](https://github.com/facebook/create-react-app) bootstrapping tool which has
+almost everything needed from CSS modules to unit tests.
+* [Cypress](https://cypress.io) integration for e2e tests  
+* [Prettier](https://prettier.io) configuration with formatting triggered on commit hook
+
+## Available scripts
 
 ### `npm start`
 
@@ -22,3 +33,11 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run e2e:open`
+
+Opens cypress UI test runner
+
+### `npm run e2e:run`
+
+Runs all cypress e2e tests in command line headlessly
