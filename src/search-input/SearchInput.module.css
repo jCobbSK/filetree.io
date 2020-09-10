@@ -4,6 +4,7 @@
     display: flex;
     justify-content: stretch;
     position: relative;
+    margin-bottom: 10px;
 }
 
 .input {
@@ -19,6 +20,7 @@
 
 .input:focus {
     border-color: color-highlight;
+    outline-color: color-highlight;
 }
 
 .icon {

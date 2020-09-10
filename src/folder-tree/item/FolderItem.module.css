@@ -1,0 +1,14 @@
+@value color-grey-400 from '../../style/variables.module.css';
+
+.wrapper {
+    line-height: 24px;
+    font-size: 1.3rem;
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+.icon > svg {
+    fill: color-grey-400;
+}
