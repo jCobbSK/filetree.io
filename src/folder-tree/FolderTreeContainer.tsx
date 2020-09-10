@@ -7,12 +7,12 @@ import { getFolders } from './FolderTreeService';
 import { FoldersList } from './list/FoldersList';
 
 export const FolderTreeContainer: React.FC = () => {
-    const [value, setValue] = useState('');
-    const folders = getFolders(paths);
+    const [query, setQuery] = useState('');
+    const folders = getFolders(paths, query);
 
     return (
         <section className={style.container}>
-            <SearchInput value={value} onChange={setValue} />
+            <SearchInput value={query} onChange={setQuery} />
             <FoldersList folders={folders} level={0} />
         </section>
     );

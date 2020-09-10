@@ -1,3 +1,5 @@
+import ASCIIFolder from '@pexxi/fold-to-ascii-ts';
+
 export interface Folder {
     name: string;
     subFolders: Folder[];
@@ -43,6 +45,39 @@ function addPath(folders: Folder[], path?: string): Folder[] {
     return folders;
 }
 
-export function getFolders(paths: string[]): Folder[] {
-    return paths.reduce<Folder[]>(addPath, []);
+function splitPath(path: string): string[] {
+    return path.split(SEPARATOR);
+}
+
+function joinPath(path: string[]): string {
+    return path.join(SEPARATOR);
+}
+
+function doesFitQuery(folderName: string, query: string) {
+    return ASCIIFolder.foldMaintaining(folderName).toLowerCase().includes(query);
+}
+
+const getFolderNameMatcher = (query: string) => {
+    let alreadyFound = false;
+    return (folderName: string) => {
+        const matches = doesFitQuery(folderName, query);
+        alreadyFound = matches || alreadyFound;
+        return alreadyFound || matches;
+    };
+};
+
+const getPathTransformer = (query: string) => (path: string): string[] => {
+    return splitPath(path).reverse().filter(getFolderNameMatcher(query)).reverse();
+};
+
+function getFilteredPaths(paths: string[], query: string): string[] {
+    return paths
+        .map(getPathTransformer(query))
+        .filter((path) => !!path.length)
+        .map(joinPath);
+}
+
+export function getFolders(paths: string[], query: string): Folder[] {
+    const filteredPaths = getFilteredPaths(paths, query.toLowerCase());
+    return filteredPaths.reduce<Folder[]>(addPath, []);
 }

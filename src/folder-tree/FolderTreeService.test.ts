@@ -12,7 +12,7 @@ describe('FolderTreeService', () => {
                 'Shows',
             ];
 
-            const folders = getFolders(paths);
+            const folders = getFolders(paths, '');
 
             expect(folders).toStrictEqual([
                 {
@@ -54,6 +54,35 @@ describe('FolderTreeService', () => {
                 {
                     name: 'Shows',
                     subFolders: [],
+                },
+            ]);
+        });
+
+        it('returns filtered paths with accents transformed into folder structure', () => {
+            const paths = [
+                'Movies',
+                'Songs/Adële/Hello',
+                'Movies/Action',
+                'Movies/Comedy/American Pie',
+                'Songs/Adele/21',
+                'Shows',
+            ];
+
+            const folders = getFolders(paths, 'ade');
+
+            expect(folders).toStrictEqual([
+                {
+                    name: 'Songs',
+                    subFolders: [
+                        {
+                            name: 'Adële',
+                            subFolders: [],
+                        },
+                        {
+                            name: 'Adele',
+                            subFolders: [],
+                        },
+                    ],
                 },
             ]);
         });
