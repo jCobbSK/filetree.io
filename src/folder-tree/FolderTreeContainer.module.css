@@ -1,7 +1,5 @@
 @value color-grey-100 from '../style/variables.module.css';
 
 .container {
-    width: 30%;
     padding: 10px;
-    border-right: 1px solid color-grey-100;
 }
