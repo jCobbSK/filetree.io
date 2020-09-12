@@ -17,7 +17,11 @@ export const FolderTreeContainer: React.FC<Props> = ({ width }) => {
     const folders = getFolders(paths, query);
 
     return (
-        <section className={style.container} style={{ flex: `0 0 ${width - PADDING_X_OFFSET}px` }}>
+        <section
+            className={style.container}
+            data-cy="folder-tree-container"
+            style={{ flex: `0 0 ${width - PADDING_X_OFFSET}px` }}
+        >
             <SearchInput value={query} onChange={setQuery} />
             <FoldersList folders={folders} level={0} query={query} />
         </section>
