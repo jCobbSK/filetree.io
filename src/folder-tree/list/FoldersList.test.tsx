@@ -12,14 +12,16 @@ describe('<FoldersList />', () => {
             },
         ];
 
-        const wrapper = shallow(<FoldersList folders={folders} level={0} />);
+        const wrapper = shallow(<FoldersList folders={folders} level={0} query="Q" />);
 
         expect(wrapper.find('FolderItem')).toHaveLength(1);
         expect(wrapper.find('FolderItem')).toHaveProp({
             name: 'Nike',
+            query: 'Q',
         });
         expect(wrapper.find('FoldersList')).toHaveLength(1);
         expect(wrapper.find('FoldersList')).toHaveProp({
+            query: 'Q',
             folders: [],
             level: 1,
         });

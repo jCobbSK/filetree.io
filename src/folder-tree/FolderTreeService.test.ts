@@ -1,4 +1,4 @@
-import { getFolders } from './FolderTreeService';
+import { getFolders, getMarkedFolderNameWithQuery } from './FolderTreeService';
 
 describe('FolderTreeService', () => {
     describe('#getFolders()', () => {
@@ -85,6 +85,26 @@ describe('FolderTreeService', () => {
                     ],
                 },
             ]);
+        });
+    });
+
+    describe('#getMarkedFolderNameWithQuery()', () => {
+        it('returns folder name if query is empty string', () => {
+            const markedName = getMarkedFolderNameWithQuery('Adele', '');
+
+            expect(markedName).toBe('Adele');
+        });
+
+        it('returns folder name if query is not present in name', () => {
+            const markedName = getMarkedFolderNameWithQuery('Adele', 'b');
+
+            expect(markedName).toBe('Adele');
+        });
+
+        it('returns folder name with marked positions of query', () => {
+            const markedName = getMarkedFolderNameWithQuery('Adele', 'e');
+
+            expect(markedName).toBe('Ad<mark>e</mark>l<mark>e</mark>');
         });
     });
 });

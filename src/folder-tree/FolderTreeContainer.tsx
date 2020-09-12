@@ -13,7 +13,7 @@ export const FolderTreeContainer: React.FC = () => {
     return (
         <section className={style.container}>
             <SearchInput value={query} onChange={setQuery} />
-            <FoldersList folders={folders} level={0} />
+            <FoldersList folders={folders} level={0} query={query} />
         </section>
     );
 };
