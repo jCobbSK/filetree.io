@@ -6,6 +6,10 @@
     font-size: 1.3rem;
 }
 
+.wrapper button:focus {
+    outline: none;
+}
+
 .icon {
     margin-right: 8px;
 }

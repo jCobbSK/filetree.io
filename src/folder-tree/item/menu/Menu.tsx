@@ -11,15 +11,9 @@ export const Menu: React.FC<Props> = () => {
     return (
         <div className={style.wrapper} data-cy="menu-wrapper">
             <nav>
-                <a href="#" data-cy="add-child">
-                    Add child
-                </a>
-                <a href="#" data-cy="rename">
-                    Rename
-                </a>
-                <a href="#" data-cy="delete">
-                    Delete
-                </a>
+                <button data-cy="add-child">Add child</button>
+                <button data-cy="rename">Rename</button>
+                <button data-cy="delete">Delete</button>
             </nav>
         </div>
     );

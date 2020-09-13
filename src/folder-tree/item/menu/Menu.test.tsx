@@ -7,6 +7,6 @@ describe('<Menu />', () => {
     it('renders 3 CTA buttons', () => {
         const wrapper = shallow(<Menu id="uuid" name="Nike" />);
 
-        expect(wrapper.find('a')).toHaveLength(3);
+        expect(wrapper.find('button')).toHaveLength(3);
     });
 });

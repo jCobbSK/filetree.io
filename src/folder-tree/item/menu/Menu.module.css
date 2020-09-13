@@ -14,24 +14,30 @@
     z-index: 1;
 }
 
-.wrapper a {
+.wrapper button {
     text-decoration: none;
     color: inherit;
     font-size: 1.5rem;
     padding: 0 10px;
     line-height: 25px;
     display: block;
+    text-align: left;
+    width: 100%;
 }
 
-.wrapper a:hover {
+.wrapper button:hover {
     background-color: color-highlight;
     color: white;
 }
 
-.wrapper a:first-child {
+.wrapper button:focus {
+    outline: none;
+}
+
+.wrapper button:first-child {
     margin-top: 10px;
 }
 
-.wrapper a:last-child {
+.wrapper button:last-child {
     margin-bottom: 10px;
 }

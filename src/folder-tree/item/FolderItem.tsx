@@ -37,9 +37,9 @@ export const FolderItem: React.FC<Props> = ({ id, name, query }) => {
                 dangerouslySetInnerHTML={{ __html: getMarkedFolderNameWithQuery(name, query) }}
             />
             {isIconVisible && (
-                <a href="#" onClick={handleClick} className={style.menuIcon} data-cy="menu-button">
+                <button onClick={handleClick} className={style.menuIcon} data-cy="menu-button">
                     <Icon type={IconType.MENU} />
-                </a>
+                </button>
             )}
             {isMenuVisible && <Menu id={id} name={name} />}
         </div>

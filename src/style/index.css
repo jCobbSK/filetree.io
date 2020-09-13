@@ -25,3 +25,9 @@ mark {
     color: inherit;
     background-color: #ffd600;
 }
+
+button {
+    background-color: inherit;
+    font: inherit;
+    border: none;
+}
