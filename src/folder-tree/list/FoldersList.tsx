@@ -15,7 +15,7 @@ export const FoldersList: React.FC<Props> = ({ folders, level, query }) => {
         <div data-cy="folder-list" style={{ paddingLeft: level === 0 ? 0 : FOLDER_PADDING }}>
             {folders.map((folder) => (
                 <div key={folder.name}>
-                    <FolderItem name={folder.name} query={query} />
+                    <FolderItem name={folder.name} id={folder.id} query={query} />
                     <FoldersList folders={folder.subFolders} level={level + 1} query={query} />
                 </div>
             ))}

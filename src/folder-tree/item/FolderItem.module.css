@@ -1,6 +1,7 @@
 @value color-grey-400 from '../../style/variables.module.css';
 
 .wrapper {
+    position: relative;
     line-height: 24px;
     font-size: 1.3rem;
 }
@@ -11,4 +12,8 @@
 
 .icon > svg {
     fill: color-grey-400;
+}
+
+.menuIcon {
+    float: right;
 }

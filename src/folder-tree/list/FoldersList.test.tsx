@@ -7,6 +7,7 @@ describe('<FoldersList />', () => {
     it('renders FolderItem and FoldersList for each folder', () => {
         const folders = [
             {
+                id: 'uuid',
                 name: 'Nike',
                 subFolders: [],
             },
@@ -18,6 +19,7 @@ describe('<FoldersList />', () => {
         expect(wrapper.find('FolderItem')).toHaveProp({
             name: 'Nike',
             query: 'Q',
+            id: 'uuid',
         });
         expect(wrapper.find('FoldersList')).toHaveLength(1);
         expect(wrapper.find('FoldersList')).toHaveProp({
