@@ -10,13 +10,14 @@ import {
     getFoldersWithoutFolderWithId,
 } from './FoldersService';
 import { StoreType } from './store';
+import { loadFolders } from './PersistanceService';
 
 interface State {
     folders: Folder[];
 }
 
 const initialState: State = {
-    folders: getParsedFoldersFromPaths(paths),
+    folders: loadFolders() || getParsedFoldersFromPaths(paths),
 };
 
 const foldersSlice = createSlice({

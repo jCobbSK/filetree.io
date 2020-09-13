@@ -46,7 +46,7 @@ export const useFolderItem = (id: string): HookResult => {
             }
             renameFolder(newName);
         },
-        [setRenaming, renameFolder, id],
+        [setRenaming, renameFolder],
     );
 
     return {

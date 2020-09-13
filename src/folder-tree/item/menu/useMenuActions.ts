@@ -13,17 +13,17 @@ export const useMenuActions = (id: string, callback?: () => void): HookResult =>
     const handleAddChild = useCallback(() => {
         dispatch(addChild(id));
         callback?.();
-    }, [id, callback]);
+    }, [id, callback, dispatch]);
     const handleDeleteFolder = useCallback(() => {
         dispatch(removeFolder(id));
         callback?.();
-    }, [id, callback]);
+    }, [id, callback, dispatch]);
     const handleRenameFolder = useCallback(
         (newName: string) => {
             dispatch(renameFolder({ id, newName }));
             callback?.();
         },
-        [id, callback],
+        [id, callback, dispatch],
     );
 
     return {
