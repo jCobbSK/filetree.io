@@ -1,6 +1,8 @@
 import ASCIIFolder from '@pexxi/fold-to-ascii-ts';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface Folder {
+    id: string;
     name: string;
     subFolders: Folder[];
 }
@@ -13,6 +15,7 @@ const HIGHLIGHTER = {
 
 function createFolder(name: string): Folder {
     return {
+        id: uuidv4(),
         name,
         subFolders: [],
     };

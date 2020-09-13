@@ -4,6 +4,10 @@ import {
     getMarkedFolderNameWithQuery,
 } from './FoldersService';
 
+jest.mock('uuid', () => ({
+    v4: jest.fn().mockReturnValue('uuid'),
+}));
+
 describe('FoldersService', () => {
     describe('#getParsedFoldersFromPaths()', () => {
         it('returns paths transformed into Folder objects structure', () => {
@@ -20,16 +24,20 @@ describe('FoldersService', () => {
 
             expect(folders).toStrictEqual([
                 {
+                    id: 'uuid',
                     name: 'Movies',
                     subFolders: [
                         {
+                            id: 'uuid',
                             name: 'Action',
                             subFolders: [],
                         },
                         {
+                            id: 'uuid',
                             name: 'Comedy',
                             subFolders: [
                                 {
+                                    id: 'uuid',
                                     name: 'American Pie',
                                     subFolders: [],
                                 },
@@ -38,16 +46,20 @@ describe('FoldersService', () => {
                     ],
                 },
                 {
+                    id: 'uuid',
                     name: 'Songs',
                     subFolders: [
                         {
+                            id: 'uuid',
                             name: 'Adele',
                             subFolders: [
                                 {
+                                    id: 'uuid',
                                     name: 'Hello',
                                     subFolders: [],
                                 },
                                 {
+                                    id: 'uuid',
                                     name: '21',
                                     subFolders: [],
                                 },
@@ -56,6 +68,7 @@ describe('FoldersService', () => {
                     ],
                 },
                 {
+                    id: 'uuid',
                     name: 'Shows',
                     subFolders: [],
                 },
@@ -66,16 +79,20 @@ describe('FoldersService', () => {
         it('returns filtered folders with accents transformed into folder structure', () => {
             const folders = [
                 {
+                    id: 'uuid',
                     name: 'Movies',
                     subFolders: [
                         {
+                            id: 'uuid',
                             name: 'Action',
                             subFolders: [],
                         },
                         {
+                            id: 'uuid',
                             name: 'Comedy',
                             subFolders: [
                                 {
+                                    id: 'uuid',
                                     name: 'American Pie',
                                     subFolders: [],
                                 },
@@ -84,16 +101,20 @@ describe('FoldersService', () => {
                     ],
                 },
                 {
+                    id: 'uuid',
                     name: 'Songs',
                     subFolders: [
                         {
+                            id: 'uuid',
                             name: 'Adele',
                             subFolders: [
                                 {
+                                    id: 'uuid',
                                     name: 'Hëllo',
                                     subFolders: [],
                                 },
                                 {
+                                    id: 'uuid',
                                     name: '21',
                                     subFolders: [],
                                 },
@@ -102,6 +123,7 @@ describe('FoldersService', () => {
                     ],
                 },
                 {
+                    id: 'uuid',
                     name: 'Shows',
                     subFolders: [],
                 },
@@ -111,12 +133,15 @@ describe('FoldersService', () => {
 
             expect(filteredFolders).toStrictEqual([
                 {
+                    id: 'uuid',
                     name: 'Songs',
                     subFolders: [
                         {
+                            id: 'uuid',
                             name: 'Adele',
                             subFolders: [
                                 {
+                                    id: 'uuid',
                                     name: 'Hëllo',
                                     subFolders: [],
                                 },
