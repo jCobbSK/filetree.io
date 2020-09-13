@@ -1,7 +1,11 @@
-import { getFolders, getMarkedFolderNameWithQuery } from './FolderTreeService';
+import {
+    getParsedFoldersFromPaths,
+    getFilteredFolders,
+    getMarkedFolderNameWithQuery,
+} from './FoldersService';
 
-describe('FolderTreeService', () => {
-    describe('#getFolders()', () => {
+describe('FoldersService', () => {
+    describe('#getParsedFoldersFromPaths()', () => {
         it('returns paths transformed into Folder objects structure', () => {
             const paths = [
                 'Movies',
@@ -12,7 +16,7 @@ describe('FolderTreeService', () => {
                 'Shows',
             ];
 
-            const folders = getFolders(paths, '');
+            const folders = getParsedFoldersFromPaths(paths);
 
             expect(folders).toStrictEqual([
                 {
@@ -57,30 +61,66 @@ describe('FolderTreeService', () => {
                 },
             ]);
         });
-
-        it('returns filtered paths with accents transformed into folder structure', () => {
-            const paths = [
-                'Movies',
-                'Songs/Adële/Hello',
-                'Movies/Action',
-                'Movies/Comedy/American Pie',
-                'Songs/Adele/21',
-                'Shows',
-            ];
-
-            const folders = getFolders(paths, 'ade');
-
-            expect(folders).toStrictEqual([
+    });
+    describe('#getFilteredFolders()', () => {
+        it('returns filtered folders with accents transformed into folder structure', () => {
+            const folders = [
+                {
+                    name: 'Movies',
+                    subFolders: [
+                        {
+                            name: 'Action',
+                            subFolders: [],
+                        },
+                        {
+                            name: 'Comedy',
+                            subFolders: [
+                                {
+                                    name: 'American Pie',
+                                    subFolders: [],
+                                },
+                            ],
+                        },
+                    ],
+                },
                 {
                     name: 'Songs',
                     subFolders: [
                         {
-                            name: 'Adële',
-                            subFolders: [],
+                            name: 'Adele',
+                            subFolders: [
+                                {
+                                    name: 'Hëllo',
+                                    subFolders: [],
+                                },
+                                {
+                                    name: '21',
+                                    subFolders: [],
+                                },
+                            ],
                         },
+                    ],
+                },
+                {
+                    name: 'Shows',
+                    subFolders: [],
+                },
+            ];
+
+            const filteredFolders = getFilteredFolders(folders, 'he');
+
+            expect(filteredFolders).toStrictEqual([
+                {
+                    name: 'Songs',
+                    subFolders: [
                         {
                             name: 'Adele',
-                            subFolders: [],
+                            subFolders: [
+                                {
+                                    name: 'Hëllo',
+                                    subFolders: [],
+                                },
+                            ],
                         },
                     ],
                 },

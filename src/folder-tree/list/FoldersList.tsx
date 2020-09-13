@@ -1,5 +1,5 @@
 import React from 'react';
-import { Folder } from '../FolderTreeService';
+import { Folder } from '../../store/FoldersService';
 import { FolderItem } from '../item/FolderItem';
 
 interface Props {

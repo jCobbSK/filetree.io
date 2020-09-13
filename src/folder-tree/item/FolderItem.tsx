@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getMarkedFolderNameWithQuery } from '../FolderTreeService';
+import { getMarkedFolderNameWithQuery } from '../../store/FoldersService';
 import { Icon, IconType } from '../../icon/Icon';
 import style from './FolderItem.module.css';
 

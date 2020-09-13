@@ -49,17 +49,26 @@ function addPath(folders: Folder[], path?: string): Folder[] {
     return folders;
 }
 
-function splitPath(path: string): string[] {
-    return path.split(SEPARATOR);
-}
-
-function joinPath(path: string[]): string {
-    return path.join(SEPARATOR);
-}
-
 function doesFitQuery(folderName: string, query: string): boolean {
     return ASCIIFolder.foldMaintaining(folderName).toLowerCase().includes(query);
 }
+
+const folderMatchMap = (query: string) => (folder: Folder): Folder | undefined => {
+    if (doesFitQuery(folder.name, query)) {
+        return folder;
+    }
+
+    const subFolders = folder.subFolders
+        .map(folderMatchMap(query))
+        .filter((folder) => !!folder) as Folder[];
+    if (!subFolders.length) {
+        return undefined;
+    }
+    return {
+        ...folder,
+        subFolders,
+    };
+};
 
 function getQueryOccuranceIndexes(folderName: string, query: string): number[] {
     const foldedFolderName = ASCIIFolder.foldMaintaining(folderName).toLowerCase();
@@ -72,28 +81,12 @@ function getQueryOccuranceIndexes(folderName: string, query: string): number[] {
     return result;
 }
 
-const getFolderNameFilter = (query: string) => {
-    let alreadyFound = false;
-    return (folderName: string): boolean => {
-        alreadyFound = doesFitQuery(folderName, query) || alreadyFound;
-        return alreadyFound;
-    };
-};
-
-const getPathTransformer = (query: string) => (path: string): string[] => {
-    return splitPath(path).reverse().filter(getFolderNameFilter(query)).reverse();
-};
-
-function getFilteredPaths(paths: string[], query: string): string[] {
-    return paths
-        .map(getPathTransformer(query))
-        .filter((path) => !!path.length)
-        .map(joinPath);
+export function getParsedFoldersFromPaths(paths: string[]): Folder[] {
+    return paths.reduce<Folder[]>(addPath, []);
 }
 
-export function getFolders(paths: string[], query: string): Folder[] {
-    const filteredPaths = query ? getFilteredPaths(paths, query.toLowerCase()) : paths;
-    return filteredPaths.reduce<Folder[]>(addPath, []);
+export function getFilteredFolders(folders: Folder[], query: string): Folder[] {
+    return folders.map(folderMatchMap(query)).filter((folder) => !!folder) as Folder[];
 }
 
 export function getMarkedFolderNameWithQuery(folderName: string, query: string): string {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { paths } from '../store/folders.json';
-import style from './FolderTreeContainer.module.css';
 import { SearchInput } from '../search-input/SearchInput';
-import { getFolders } from './FolderTreeService';
 import { FoldersList } from './list/FoldersList';
+import { selectFilteredFolders } from '../store/FoldersSlice';
+import style from './FolderTreeContainer.module.css';
 
 interface Props {
     width: number;
@@ -14,7 +14,7 @@ const PADDING_X_OFFSET = 20;
 
 export const FolderTreeContainer: React.FC<Props> = ({ width }) => {
     const [query, setQuery] = useState('');
-    const folders = getFolders(paths, query);
+    const folders = useSelector(selectFilteredFolders(query));
 
     return (
         <section

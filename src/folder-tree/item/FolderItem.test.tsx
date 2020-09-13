@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import * as FolderTreeService from '../FolderTreeService';
+import * as FolderTreeService from '../../store/FoldersService';
 import { IconType } from '../../icon/Icon';
 import { FolderItem } from './FolderItem';
 
