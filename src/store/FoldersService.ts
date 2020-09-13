@@ -13,7 +13,7 @@ const HIGHLIGHTER = {
     END: '</mark>',
 };
 
-function createFolder(name: string): Folder {
+export function createFolder(name: string): Folder {
     return {
         id: uuidv4(),
         name,
@@ -115,4 +115,42 @@ export function getMarkedFolderNameWithQuery(folderName: string, query: string):
         },
         '',
     );
+}
+
+const findFolderReducer = (id: string) => (
+    foundFolder: Folder | undefined,
+    folder: Folder,
+): Folder | undefined => {
+    if (foundFolder) {
+        return foundFolder;
+    }
+    if (folder.id === id) {
+        return folder;
+    }
+
+    return folder.subFolders.reduce(findFolderReducer(id), undefined);
+};
+
+export function findFolderById(folders: Folder[], id: string): Folder | undefined {
+    return folders.reduce(findFolderReducer(id), undefined);
+}
+
+const isFolderOfIdFilter = (id: string) => (folder: Folder): boolean => {
+    return folder.id === id;
+};
+
+const getFolderWithoutIdReducer = (id: string) => (folders: Folder[], folder: Folder): Folder[] => {
+    if (isFolderOfIdFilter(id)(folder)) {
+        return folders;
+    }
+    const newFolder = {
+        ...folder,
+        subFolders: folder.subFolders.reduce(getFolderWithoutIdReducer(id), []),
+    };
+
+    return [...folders, newFolder];
+};
+
+export function getFoldersWithoutFolderWithId(folders: Folder[], id: string): Folder[] {
+    return folders.reduce(getFolderWithoutIdReducer(id), []);
 }

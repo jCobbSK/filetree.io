@@ -4,7 +4,7 @@ import { foldersReducer } from './FoldersSlice';
 
 export const store = configureStore({
     reducer: {
-        folders: foldersReducer,
+        foldersReducer: foldersReducer,
     },
 });
 export type StoreType = ReturnType<typeof store.getState>;

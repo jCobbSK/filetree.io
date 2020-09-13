@@ -2,11 +2,65 @@ import {
     getParsedFoldersFromPaths,
     getFilteredFolders,
     getMarkedFolderNameWithQuery,
+    findFolderById,
+    getFoldersWithoutFolderWithId,
 } from './FoldersService';
 
 jest.mock('uuid', () => ({
     v4: jest.fn().mockReturnValue('uuid'),
 }));
+
+const folders = [
+    {
+        id: 'MoviesId',
+        name: 'Movies',
+        subFolders: [
+            {
+                id: 'ActionId',
+                name: 'Action',
+                subFolders: [],
+            },
+            {
+                id: 'ComedyId',
+                name: 'Comedy',
+                subFolders: [
+                    {
+                        id: 'AmericanPieId',
+                        name: 'American Pie',
+                        subFolders: [],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        id: 'SongsId',
+        name: 'Songs',
+        subFolders: [
+            {
+                id: 'AdeleId',
+                name: 'Adele',
+                subFolders: [
+                    {
+                        id: 'HëlloId',
+                        name: 'Hëllo',
+                        subFolders: [],
+                    },
+                    {
+                        id: '21Id',
+                        name: '21',
+                        subFolders: [],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        id: 'ShowsId',
+        name: 'Shows',
+        subFolders: [],
+    },
+];
 
 describe('FoldersService', () => {
     describe('#getParsedFoldersFromPaths()', () => {
@@ -77,71 +131,19 @@ describe('FoldersService', () => {
     });
     describe('#getFilteredFolders()', () => {
         it('returns filtered folders with accents transformed into folder structure', () => {
-            const folders = [
-                {
-                    id: 'uuid',
-                    name: 'Movies',
-                    subFolders: [
-                        {
-                            id: 'uuid',
-                            name: 'Action',
-                            subFolders: [],
-                        },
-                        {
-                            id: 'uuid',
-                            name: 'Comedy',
-                            subFolders: [
-                                {
-                                    id: 'uuid',
-                                    name: 'American Pie',
-                                    subFolders: [],
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    id: 'uuid',
-                    name: 'Songs',
-                    subFolders: [
-                        {
-                            id: 'uuid',
-                            name: 'Adele',
-                            subFolders: [
-                                {
-                                    id: 'uuid',
-                                    name: 'Hëllo',
-                                    subFolders: [],
-                                },
-                                {
-                                    id: 'uuid',
-                                    name: '21',
-                                    subFolders: [],
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    id: 'uuid',
-                    name: 'Shows',
-                    subFolders: [],
-                },
-            ];
-
             const filteredFolders = getFilteredFolders(folders, 'he');
 
             expect(filteredFolders).toStrictEqual([
                 {
-                    id: 'uuid',
+                    id: 'SongsId',
                     name: 'Songs',
                     subFolders: [
                         {
-                            id: 'uuid',
+                            id: 'AdeleId',
                             name: 'Adele',
                             subFolders: [
                                 {
-                                    id: 'uuid',
+                                    id: 'HëlloId',
                                     name: 'Hëllo',
                                     subFolders: [],
                                 },
@@ -170,6 +172,54 @@ describe('FoldersService', () => {
             const markedName = getMarkedFolderNameWithQuery('Adele', 'e');
 
             expect(markedName).toBe('Ad<mark>e</mark>l<mark>e</mark>');
+        });
+    });
+
+    describe('#findFolderById()', () => {
+        it('returns folder of id', () => {
+            const folder = findFolderById(folders, '21Id');
+
+            expect(folder).toStrictEqual({
+                id: '21Id',
+                name: '21',
+                subFolders: [],
+            });
+        });
+    });
+
+    describe('#getFoldersWithoutFolderWithId()', () => {
+        it('returns folders without folder with specific id', () => {
+            const newFolders = getFoldersWithoutFolderWithId(folders, 'SongsId');
+
+            expect(newFolders).toStrictEqual([
+                {
+                    id: 'MoviesId',
+                    name: 'Movies',
+                    subFolders: [
+                        {
+                            id: 'ActionId',
+                            name: 'Action',
+                            subFolders: [],
+                        },
+                        {
+                            id: 'ComedyId',
+                            name: 'Comedy',
+                            subFolders: [
+                                {
+                                    id: 'AmericanPieId',
+                                    name: 'American Pie',
+                                    subFolders: [],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    id: 'ShowsId',
+                    name: 'Shows',
+                    subFolders: [],
+                },
+            ]);
         });
     });
 });
