@@ -37,8 +37,12 @@ export const FolderItem: React.FC<Props> = ({ id, name, query }) => {
             )}
             {isRenaming && <RenameInput name={name} onConfirm={onRename} />}
             {isMenuIconVisible && (
-                <button onClick={onMenuIconClick} className={style.menuIcon} data-cy="menu-button">
-                    <Icon type={IconType.MENU} />
+                <button
+                    onClick={onMenuIconClick}
+                    className={style.menuIconButton}
+                    data-cy="menu-button"
+                >
+                    <Icon type={IconType.MENU} className={style.menuIcon} />
                 </button>
             )}
             {isMenuVisible && (

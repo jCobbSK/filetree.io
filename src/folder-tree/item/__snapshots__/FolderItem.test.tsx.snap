@@ -20,11 +20,12 @@ exports[`<FolderItem /> renders menu icon when isMenuIconVisible is true 1`] = `
     data-cy="folder-name"
   />
   <button
-    className="menuIcon"
+    className="menuIconButton"
     data-cy="menu-button"
     onClick={[MockFunction onMenuIconClick]}
   >
     <Icon
+      className="menuIcon"
       type={1}
     />
   </button>

@@ -1,4 +1,4 @@
-@value color-grey-400 from '../../style/variables.module.css';
+@value color-grey-400, color-font-primary from '../../style/variables.module.css';
 
 .wrapper {
     position: relative;
@@ -14,10 +14,20 @@
     margin-right: 8px;
 }
 
-.icon > svg {
+.icon svg {
     fill: color-grey-400;
 }
 
-.menuIcon {
+.menuIconButton {
     float: right;
+}
+
+.menuIcon {
+    display: inline-flex;
+    vertical-align: middle;
+    padding-bottom: 5px;
+}
+
+.menuIcon svg {
+    fill: color-font-primary;
 }
