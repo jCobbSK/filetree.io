@@ -4,7 +4,10 @@
     "private": true,
     "scripts": {
         "start": "react-scripts start",
+        "prebuild": "npm test -- --watchAll=false && npm run e2e:run",
         "build": "react-scripts build",
+        "postbuild": "npm run deploy",
+        "deploy": "node ./scripts/deployNetlify.js",
         "test": "react-scripts test",
         "test:coverage": "npm test -- --coverage --watchAll=false",
         "eject": "react-scripts eject",
@@ -31,6 +34,7 @@
         "husky": "^4.3.0",
         "jest-enzyme": "^7.1.2",
         "lint-staged": "^10.3.0",
+        "netlify": "^4.3.13",
         "prettier": "^2.1.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
