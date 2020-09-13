@@ -33,6 +33,7 @@ export const useFolderItem = (id: string): HookResult => {
     }, [isMenuVisible, setIconVisible]);
     const onMenuItemClick = useCallback(() => {
         setIsMenuVisible(false);
+        setIconVisible(false);
     }, [setIsMenuVisible]);
     const onRenameMenuItemClick = useCallback(() => {
         setRenaming(true);
