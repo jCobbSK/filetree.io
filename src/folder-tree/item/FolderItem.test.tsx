@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 
 import * as useFolderItem from './useFolderItem';
 import * as FolderTreeService from '../../store/FoldersService';
-import { IconType } from '../../icon/Icon';
 import { FolderItem } from './FolderItem';
 
 const DEFAULT_HOOK_RESULTS = {

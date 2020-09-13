@@ -76,13 +76,21 @@ const folderMatchMap = (query: string) => (folder: Folder): Folder | undefined =
     };
 };
 
-function getQueryOccuranceIndexes(folderName: string, query: string): number[] {
+function getQueryIndex(folderName: string, query: string, offset?: number): number {
+    const lowerCaseFolderName = folderName.toLowerCase();
     const foldedFolderName = ASCIIFolder.foldMaintaining(folderName).toLowerCase();
+    if (foldedFolderName.indexOf(query, offset) !== -1) {
+        return foldedFolderName.indexOf(query, offset);
+    }
+    return lowerCaseFolderName.indexOf(query, offset);
+}
+
+function getQueryOccuranceIndexes(folderName: string, query: string): number[] {
     const result = [];
-    let index = foldedFolderName.indexOf(query);
+    let index = getQueryIndex(folderName, query);
     while (index !== -1) {
         result.push(index);
-        index = foldedFolderName.indexOf(query, index + 1);
+        index = getQueryIndex(folderName, query, index + 1);
     }
     return result;
 }
@@ -92,14 +100,16 @@ export function getParsedFoldersFromPaths(paths: string[]): Folder[] {
 }
 
 export function getFilteredFolders(folders: Folder[], query: string): Folder[] {
-    return folders.map(folderMatchMap(query)).filter((folder) => !!folder) as Folder[];
+    return folders
+        .map(folderMatchMap(query.toLowerCase()))
+        .filter((folder) => !!folder) as Folder[];
 }
 
 export function getMarkedFolderNameWithQuery(folderName: string, query: string): string {
     if (!query) {
         return folderName;
     }
-    const queryStartIndexes = getQueryOccuranceIndexes(folderName, query);
+    const queryStartIndexes = getQueryOccuranceIndexes(folderName, query.toLowerCase());
     const queryLength = query.length;
     const queryEndIndexes = queryStartIndexes.map((index) => index + queryLength);
     if (!queryStartIndexes.length) {

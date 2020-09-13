@@ -14,7 +14,7 @@ exports[`<FolderItem /> renders menu icon when isMenuIconVisible is true 1`] = `
   <span
     dangerouslySetInnerHTML={
       Object {
-        "__html": "Nike",
+        "__html": "<mark>N</mark>ike",
       }
     }
     data-cy="folder-name"
@@ -46,7 +46,7 @@ exports[`<FolderItem /> renders menu when isMenuVisible is true 1`] = `
   <span
     dangerouslySetInnerHTML={
       Object {
-        "__html": "Nike",
+        "__html": "<mark>N</mark>ike",
       }
     }
     data-cy="folder-name"
