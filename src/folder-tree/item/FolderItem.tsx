@@ -1,9 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 
 import { getMarkedFolderNameWithQuery } from '../../store/FoldersService';
 import { Icon, IconType } from '../../icon/Icon';
 import { Menu } from './menu/Menu';
 import style from './FolderItem.module.css';
+import { RenameInput } from './RenameInput';
+import { useFolderItem } from './useFolderItem';
 
 interface Props {
     id: string;
@@ -12,36 +14,36 @@ interface Props {
 }
 
 export const FolderItem: React.FC<Props> = ({ id, name, query }) => {
-    const [isMenuVisible, setIsMenuVisible] = useState(false);
-    const [isIconVisible, setIconVisible] = useState(false);
-    const handleClick = useCallback(() => {
-        setIsMenuVisible(!isMenuVisible);
-        setIconVisible(!isMenuVisible);
-    }, [setIsMenuVisible, isMenuVisible, setIconVisible]);
-    const handleMouseLeave = useCallback(() => {
-        if (isMenuVisible) {
-            return;
-        }
-        setIconVisible(false);
-    }, [isMenuVisible, setIconVisible]);
+    const {
+        isRenaming,
+        isMenuVisible,
+        isMenuIconVisible,
+        onMenuIconClick,
+        onMenuItemClick,
+        onRenameMenuItemClick,
+        onRename,
+        onHover,
+        onHoverOut,
+    } = useFolderItem(id);
 
     return (
-        <div
-            className={style.wrapper}
-            onMouseEnter={() => setIconVisible(true)}
-            onMouseLeave={handleMouseLeave}
-        >
+        <div className={style.wrapper} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
             <Icon type={IconType.FOLDER} className={style.icon} data-cy="folder-icon" />
-            <span
-                data-cy="folder-name"
-                dangerouslySetInnerHTML={{ __html: getMarkedFolderNameWithQuery(name, query) }}
-            />
-            {isIconVisible && (
-                <button onClick={handleClick} className={style.menuIcon} data-cy="menu-button">
+            {!isRenaming && (
+                <span
+                    data-cy="folder-name"
+                    dangerouslySetInnerHTML={{ __html: getMarkedFolderNameWithQuery(name, query) }}
+                />
+            )}
+            {isRenaming && <RenameInput name={name} onConfirm={onRename} />}
+            {isMenuIconVisible && (
+                <button onClick={onMenuIconClick} className={style.menuIcon} data-cy="menu-button">
                     <Icon type={IconType.MENU} />
                 </button>
             )}
-            {isMenuVisible && <Menu id={id} name={name} />}
+            {isMenuVisible && (
+                <Menu id={id} onClick={onMenuItemClick} onRenameClick={onRenameMenuItemClick} />
+            )}
         </div>
     );
 };

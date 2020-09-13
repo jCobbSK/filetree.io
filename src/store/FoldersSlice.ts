@@ -32,12 +32,18 @@ const foldersSlice = createSlice({
         removeFolder(state: State, { payload }: PayloadAction<string>) {
             state.folders = getFoldersWithoutFolderWithId(state.folders, payload);
         },
+        renameFolder(state: State, { payload }: PayloadAction<{ id: string; newName: string }>) {
+            const folder = findFolderById(state.folders, payload.id);
+            if (folder) {
+                folder.name = payload.newName;
+            }
+        },
     },
 });
 
 export const {
     reducer: foldersReducer,
-    actions: { addChild, removeFolder },
+    actions: { addChild, removeFolder, renameFolder },
 } = foldersSlice;
 
 export const selectFilteredFolders = (query: string) => (store: StoreType) => {

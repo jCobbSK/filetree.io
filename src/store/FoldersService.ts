@@ -53,7 +53,10 @@ function addPath(folders: Folder[], path?: string): Folder[] {
 }
 
 function doesFitQuery(folderName: string, query: string): boolean {
-    return ASCIIFolder.foldMaintaining(folderName).toLowerCase().includes(query);
+    return (
+        folderName.toLowerCase().includes(query) ||
+        ASCIIFolder.foldMaintaining(folderName).toLowerCase().includes(query)
+    );
 }
 
 const folderMatchMap = (query: string) => (folder: Folder): Folder | undefined => {

@@ -1,31 +1,31 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
-import { addChild, removeFolder } from '../../../store/FoldersSlice';
+import { useMenuActions } from './useMenuActions';
 import style from './Menu.module.css';
 
 interface Props {
     id: string;
-    name: string;
+    onClick(): void;
+    onRenameClick(): void;
 }
 
-export const Menu: React.FC<Props> = ({ id }) => {
-    const dispatch = useDispatch();
-    const handleAddChild = useCallback(() => {
-        dispatch(addChild(id));
-    }, [id, dispatch]);
-    const handleDelete = useCallback(() => {
-        dispatch(removeFolder(id));
-    }, [id, dispatch]);
+export const Menu: React.FC<Props> = ({ id, onClick, onRenameClick }) => {
+    const { addChild, deleteFolder } = useMenuActions(id, onClick);
+    const handleRename = useCallback(() => {
+        onRenameClick();
+        onClick();
+    }, [onRenameClick, onClick]);
 
     return (
         <div className={style.wrapper} data-cy="menu-wrapper">
             <nav>
-                <button data-cy="add-child" onClick={handleAddChild}>
+                <button data-cy="add-child" onClick={addChild}>
                     Add child
                 </button>
-                <button data-cy="rename">Rename</button>
-                <button data-cy="delete" onClick={handleDelete}>
+                <button data-cy="rename" onClick={handleRename}>
+                    Rename
+                </button>
+                <button data-cy="delete" onClick={deleteFolder}>
                     Delete
                 </button>
             </nav>
