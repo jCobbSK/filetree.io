@@ -1,4 +1,6 @@
-# Jakub tries to infiltrate Smarkup
+# Filetree.io
+
+Simple file management tool.
 
 > "I'm a programmer. I like programming. And the best way I've found to have a positive impact on code is to write it." -- Uncle Bob
 

@@ -34,6 +34,7 @@
         "husky": "^4.3.0",
         "jest-enzyme": "^7.1.2",
         "lint-staged": "^10.3.0",
+        "lodash": "^4.17.20",
         "netlify": "^4.3.13",
         "prettier": "^2.1.1",
         "react": "^16.13.1",
@@ -46,6 +47,7 @@
         "uuid": "^8.3.0"
     },
     "devDependencies": {
+        "@types/lodash": "^4.14.168",
         "cypress": "5.1.0"
     },
     "eslintConfig": {

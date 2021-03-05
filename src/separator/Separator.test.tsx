@@ -15,11 +15,13 @@ describe('<Separator />', () => {
     });
 
     it('calls onWidthChange when drag started and dragover is fired on window', () => {
+        jest.useFakeTimers();
         const onWidthChange = jest.fn();
         const wrapper = mount(<Separator onWidthChange={onWidthChange} />);
 
         wrapper.simulate('dragStart');
         window.dispatchEvent(new MouseEvent('dragover', { clientX: 123 }));
+        jest.runAllTimers();
 
         expect(onWidthChange).toHaveBeenCalledWith(123);
     });
