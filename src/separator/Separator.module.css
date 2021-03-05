@@ -1,0 +1,8 @@
+@value color-grey-100 from '../style/variables.module.css';
+
+.separator {
+    height: 100%;
+    width: 4px;
+    border-left: 1px solid color-grey-100;
+    cursor: ew-resize;
+}

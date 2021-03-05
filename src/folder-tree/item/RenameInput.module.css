@@ -1,0 +1,9 @@
+@value color-highlight from '../../style/variables.module.css';
+
+.Form {
+    display: inline-block;
+}
+
+.Form input {
+    outline-color: color-highlight;
+}

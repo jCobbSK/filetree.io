@@ -1,0 +1,33 @@
+@value color-grey-400, color-font-primary from '../../style/variables.module.css';
+
+.wrapper {
+    position: relative;
+    line-height: 24px;
+    font-size: 1.3rem;
+}
+
+.wrapper button:focus {
+    outline: none;
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+.icon svg {
+    fill: color-grey-400;
+}
+
+.menuIconButton {
+    float: right;
+}
+
+.menuIcon {
+    display: inline-flex;
+    vertical-align: middle;
+    padding-bottom: 5px;
+}
+
+.menuIcon svg {
+    fill: color-font-primary;
+}

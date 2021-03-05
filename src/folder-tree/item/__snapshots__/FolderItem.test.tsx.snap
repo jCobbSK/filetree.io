@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FolderItem /> renders menu icon when isMenuIconVisible is true 1`] = `
+<div
+  className="wrapper"
+  onMouseEnter={[MockFunction onHover]}
+  onMouseLeave={[MockFunction onHoverOut]}
+>
+  <Icon
+    className="icon"
+    data-cy="folder-icon"
+    type={0}
+  />
+  <span
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<mark>N</mark>ike",
+      }
+    }
+    data-cy="folder-name"
+  />
+  <button
+    className="menuIconButton"
+    data-cy="menu-button"
+    onClick={[MockFunction onMenuIconClick]}
+  >
+    <Icon
+      className="menuIcon"
+      type={1}
+    />
+  </button>
+</div>
+`;
+
+exports[`<FolderItem /> renders menu when isMenuVisible is true 1`] = `
+<div
+  className="wrapper"
+  onMouseEnter={[MockFunction onHover]}
+  onMouseLeave={[MockFunction onHoverOut]}
+>
+  <Icon
+    className="icon"
+    data-cy="folder-icon"
+    type={0}
+  />
+  <span
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<mark>N</mark>ike",
+      }
+    }
+    data-cy="folder-name"
+  />
+  <Menu
+    id="uuid"
+    onClick={[MockFunction onMenuItemClick]}
+    onRenameClick={[MockFunction onRenameMenuItemClick]}
+  />
+</div>
+`;
+
+exports[`<FolderItem /> renders rename input when isRenaming is true 1`] = `
+<div
+  className="wrapper"
+  onMouseEnter={[MockFunction onHover]}
+  onMouseLeave={[MockFunction onHoverOut]}
+>
+  <Icon
+    className="icon"
+    data-cy="folder-icon"
+    type={0}
+  />
+  <RenameInput
+    name="Nike"
+    onConfirm={[MockFunction onRename]}
+  />
+</div>
+`;
+
+exports[`<FolderItem /> renders wrapper with hover listeners, icon and highlighted name with query when isRenaming is false 1`] = `
+<div
+  className="wrapper"
+  onMouseEnter={[MockFunction onHover]}
+  onMouseLeave={[MockFunction onHoverOut]}
+>
+  <Icon
+    className="icon"
+    data-cy="folder-icon"
+    type={0}
+  />
+  <span
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "NikeTransformed",
+      }
+    }
+    data-cy="folder-name"
+  />
+</div>
+`;
